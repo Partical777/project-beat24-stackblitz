@@ -18,7 +18,8 @@ export class AppComponent  {
   
     this.logo1 = new TimelineMax({onUpdate: this.updatePercentage});
 
-    this.logo1.from(".test2", 1, {x: 1500, opacity: 0});
+    //目前問題：Scrolmagic載入太慢，可能需要直接放在檔案中
+    this.logo1.fromTo(".test2", 1, {x: -600}, {x: 600});
 
     new ScrollMagic.Scene({
         triggerElement : ".sec2",
