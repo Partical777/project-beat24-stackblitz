@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TimelineMax, TweenMax } from 'gsap';
-import { ScrollMagic } from 'scrollmagic';
+declare let ScrollMagic: any
 
 @Component({
   selector: 'my-app',
@@ -9,18 +9,30 @@ import { ScrollMagic } from 'scrollmagic';
 })
 export class AppComponent  {
 
-  controller = new ScrollMagic.Controller();
-  
-  logo1 = new TimelineMax({repeat:-1, repeatDelay:1});
+  controller;
+  logo1;
+  scene;
 
-  scene = new ScrollMagic({
-    triggerElement : "sec2",
-    triggerHook : "onLeave",
-    duration: "100%"
-  })
-    .setPin("sec2")
-    .setTween(this.logo1)
-    .addTo(this.controller);
+  ngOnInit() {
+    this.controller = new ScrollMagic.Controller();
+  
+    this.logo1 = new TimelineMax({repeat:-1, repeatDelay:1});
+
+    this.logo1.from(".test2", 1, {x: 1500, opacity: 0});
+
+    this.scene = new ScrollMagic({
+        triggerElement : "sec2",
+        triggerHook : "onLeave",
+        duration: "100%"
+      })
+        .setPin("sec2")
+        .setTween(this.logo1)
+        .addTo(this.controller);
+  }
+
+  
+
+  
   // ngOnInit() {
   //   this.logo1.from(".test2", 1, {x: 200});
   // }
